@@ -18,7 +18,7 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::group(['middleware' => 'auth:api'], function () {
+// Route::group(['middleware' => 'auth:api'], function () {
     
     Route::apiResource('settings', "API\SettingsController");
 
@@ -37,5 +37,5 @@ Route::group(['middleware' => 'auth:api'], function () {
     Route::post('revoke-all-permissions', "API\PermissionController@revokeAllPermissions")->name('permissions.revokeAllPermissions');
 
 
-});
+// });
 
