@@ -61,7 +61,8 @@
                     label="Login"
                     name="login"
                     prepend-icon="person"
-                    type="text"
+                    type="email"
+                    v-model="email"
                   />
 
                   <v-text-field
@@ -70,13 +71,14 @@
                     name="password"
                     prepend-icon="lock"
                     type="password"
+                    v-model="password"
                   />
                 </v-form>
               </v-card-text>
               <v-card-actions>
-                <v-btn outlined color="accent">Forgot password?</v-btn>
+                <v-btn outlined color="accent"  >Forgot password?</v-btn>
                 <v-spacer />
-                <v-btn color="primary">Login</v-btn>
+                <v-btn color="primary" @click="doLogin">Login</v-btn>
 
               </v-card-actions>
             </v-card>
@@ -94,6 +96,41 @@
   export default {
     props: {
       source: String,
+    },
+
+    data() {
+      return {
+        email: '',
+        password: '',
+      }
+    },
+
+    methods: {
+      doLogin() {
+        let data = {
+          'email' : this.email,
+          'password': this.password
+        }
+        axios.post('/login', data).then((res) => {
+          console.log(res);
+          document.location.href = '/home/dashboard'
+        }).catch((err) => {
+          console.log(err.response.data.message);
+          console.log(err.response.data.errors);
+          console.log(err.response.status);
+        })
+        
+      }
+    },
+
+    mounted() {
+      axios.get('/user').then((res) => {
+        console.log(res);
+        
+        if(res != null || res != undefined){
+          document.location.href = '/home/dashboard'
+        }
+      })
     },
   }
 </script>

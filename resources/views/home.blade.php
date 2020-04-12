@@ -23,7 +23,7 @@
 </head>
 <body>
     <div id="app">
-        <home-component></home-component>
+        <home-component :user="{{ Auth::user() }}" :appname="`{{ config('app.name') }}`"></home-component>
     </div>
 </body>
 </html>

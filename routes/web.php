@@ -1,6 +1,8 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use Illuminate\Http\Request;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -12,10 +14,18 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
-Auth::routes();
+Route::middleware('auth')->get('/user', function (Request $request) {
+    return $request->user();
+});
 
-Route::get('/welcome', "WelcomeController@index")->name('welcome');
+Route::get('/{path}', "WelcomeController@index")
+    ->name('welcome')
+    ->where('path', "|login");
 
-Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/{any}', 'HomeController@index')
+    ->name('home')
+    ->where('any', "home.*");
 
 Route::get('/admin', "AdminController@index")->name('admin');
+
+Auth::routes();

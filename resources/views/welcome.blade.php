@@ -23,9 +23,7 @@
 </head>
 <body>
     <div id="app">
-
-        @yield('content')
-
+        <welcome-component></welcome-component>
     </div>
 </body>
 </html>

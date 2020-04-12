@@ -15,9 +15,7 @@ import VueAxios from 'axios'
 Vue.use({Axios, VueAxios});
 
 // import { Form, HasError, AlertError } from 'vform'
-
 // Vue.use(Form)
-
 // Vue.component(HasError.name, HasError)
 // Vue.component(AlertError.name, AlertError)
 
@@ -28,10 +26,12 @@ Vue.use({Axios, VueAxios});
 
 Vue.component('example-component', require('./components/ExampleComponent.vue').default);
 Vue.component('home-component', require('./components/Home.vue').default);
-Vue.component('login-component', require('./components/auth/Login.vue').default);
+Vue.component('welcome-component', require('./components/Welcome.vue').default);
 
+import router from "./router/router";
 
 const app = new Vue({
     vuetify,
     el: '#app',
+    router
 });
