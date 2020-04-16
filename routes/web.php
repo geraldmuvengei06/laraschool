@@ -20,7 +20,7 @@ Route::middleware('auth')->get('/user', function (Request $request) {
 
 Route::get('/{path}', "WelcomeController@index")
     ->name('welcome')
-    ->where('path', "|login");
+    ->where('path', "|login|register");
 
 Route::get('/{any}', 'HomeController@index')
     ->name('home')
@@ -29,3 +29,24 @@ Route::get('/{any}', 'HomeController@index')
 Route::get('/admin', "AdminController@index")->name('admin');
 
 Auth::routes();
+
+Route::group(['middleware' => 'auth'], function () {
+    
+    Route::apiResource('settings', "API\SettingsController");
+
+    // roles
+    Route::apiResource('roles', "API\RoleController");
+    Route::post('assign-role-to-user', "API\RoleController@assignRoleToUser")->name('roles.assignRoleToUser');
+    Route::post('revoke-role-from-user', "API\RoleController@revokeRoleFromUser")->name('roles.revokeRoleFromUser');
+
+    // permissions
+    Route::apiResource('permissions', "API\PermissionController");
+    Route::post('assign-permission-to-user', "API\PermissionController@assignPermissionToUser")->name('permissions.assignPermissionToUser');
+    Route::post('revoke-permission-from-user', "API\PermissionController@revokePermissionFromUser")->name('permissions.revokePermissionFromUser');
+    Route::post('assign-permission-to-role', "API\PermissionController@assignPermissionToRole")->name('permissions.assignPermissionToRole');
+    Route::post('revoke-permission-from-role', "API\PermissionController@revokePermissionFromRole")->name('permissions.revokePermissionFromRole');
+    Route::post('assign-all-permissions', "API\PermissionController@assignAllPermissions")->name('permissions.assignAllPermissions');
+    Route::post('revoke-all-permissions', "API\PermissionController@revokeAllPermissions")->name('permissions.revokeAllPermissions');
+
+
+});

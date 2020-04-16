@@ -29,6 +29,7 @@
         "nprogress": "^0.2.0",
         "sweetalert": "^2.1.2",
         "vform": "^1.0.1",
+        "vue-page-transition": "^0.2.2",
         "vue-router": "^3.1.6",
         "vuejs-service-container": "^1.1.1",
         "vuetify": "^2.2.20",

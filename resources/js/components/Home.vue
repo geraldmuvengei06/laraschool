@@ -1,12 +1,14 @@
 <template>
-  <v-app id="inspire">
+  <v-app 
+  id="inspire"
+  color="gray lighten-4">
    
 
     <v-app-bar
       app
       clipped-right
-      light
-      color="white"
+      dark
+      color="primary"
       dense
     >
       <v-app-bar-nav-icon @click.stop="toggleMinivariant"/>
@@ -106,10 +108,11 @@
           </v-list-item>
         </v-list-group>
       </v-list-group>
+      
 
       <v-divider></v-divider>
 
-      <!-- <v-spacer></v-spacer> -->
+  
       
      
       </v-list>
@@ -128,8 +131,13 @@
       </template>
     </v-navigation-drawer>
 
-   
-    <router-view></router-view>
+    <div class="is-background grey lighten-5 fill-height"
+        fluid>
+      <router-view/>
+
+    </div>
+
+
 
     <v-navigation-drawer
       v-model="right"
@@ -175,7 +183,7 @@
       profile: profile,
       
       admins: [
-        ['Management', 'role_permissions'],
+        ['Roles', 'role_permissions'],
         ['Settings', 'settings'],
       ],
       cruds: [
@@ -190,6 +198,9 @@
       toggleMinivariant(){        
         this.miniVariant = !this.miniVariant
         this.expandOnHover = !this.expandOnHover
+        if (!this.drawer) {
+          this.drawer = true
+        }
       },
 
       doLogout() {
@@ -227,12 +238,6 @@
       text-transform: uppercase !important;
   }
 
- 
-  .v-list-item--active.v-list-item.v-list-item--link{
-      .v-list-item__title, .v-icon{
-          color: #2196f3;
-      } 
-  }
 
   
 </style>

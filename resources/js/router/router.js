@@ -3,6 +3,7 @@ import VueRouter from 'vue-router'
 Vue.use(VueRouter)
 
 import Login from '../components/Auth/Login.vue'
+import Register from '../components/Auth/Register.vue'
 import HomeContent from '../components/HomeContent.vue'
 
 import Dashboard from '../components/pages/Dashboard.vue'
@@ -21,6 +22,17 @@ let routes = [
             description: 'Login to laraschool',
         }
     },
+
+    {
+        path: '/register',
+        name: 'register',
+        component: Register,
+        meta: {
+            title: 'Register',
+            description: 'Register to laraschool'
+        }
+    },
+
     {
         path: '/home',
         component: HomeContent,

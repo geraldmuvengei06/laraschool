@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
 
 
 class RegisterController extends Controller
@@ -57,8 +58,8 @@ class RegisterController extends Controller
             'first' => ['required', 'string', 'max:255'],
             'last' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
-            'phone' => ['required', 'numeric', 'unique:users'],
-            'id_number' => ['required', 'numeric', 'unique:users'],
+            'phone' => ['nullable', 'numeric', 'unique:users'],
+            'id_number' => ['nullable', 'numeric', 'unique:users'],
             'address' => ['nullable', 'string', 'max:255'],
             'profession' => ['nullable', 'string', 'max:255'],
             'password' => ['required', 'string', 'min:8', 'confirmed'],
@@ -74,14 +75,14 @@ class RegisterController extends Controller
     protected function create(array $data)
     {
         return User::create([
-            'initials' => $data['initials'],
+            // 'initials' => $data['initials'],
             'first' => $data['first'],
             'last' => $data['last'],
             'email' => $data['email'],
-            'phone' => $data['phone'],
-            'id_number' => $data['id_number'],
-            'address' => $data['address'],
-            'profession' => $data['profession'],
+            // 'phone' => $data['phone'],
+            // 'id_number' => $data['id_number'],
+            // 'address' => $data['address'],
+            // 'profession' => $data['profession'],
             'password' => Hash::make($data['password']),
         ]);
     }

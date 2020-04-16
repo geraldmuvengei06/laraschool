@@ -9,15 +9,35 @@ Vue.use(VueRoute);
 
 import vuetify from './plugins/vuetify.js'
 
+// Requests and responses
+
 import Axios from 'axios'
 import VueAxios from 'axios'
 
 Vue.use({Axios, VueAxios});
 
-// import { Form, HasError, AlertError } from 'vform'
-// Vue.use(Form)
-// Vue.component(HasError.name, HasError)
-// Vue.component(AlertError.name, AlertError)
+import { Form, HasError, AlertError } from 'vform'
+window.Form = Form
+Vue.component(HasError.name, HasError)
+Vue.component(AlertError.name, AlertError)
+
+// transition
+
+import VuePageTransition from 'vue-page-transition'
+
+Vue.use(VuePageTransition)
+
+// Progress
+import NProgress from 'nprogress'
+NProgress.configure({
+    // easing: 'ease',
+    // speed: 500,
+    showSpinner: true,
+
+})
+
+window.NProgress = NProgress
+
 
 // const files = require.context('./', true, /\.vue$/i)
 // files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(key).default))
@@ -27,6 +47,15 @@ Vue.use({Axios, VueAxios});
 Vue.component('example-component', require('./components/ExampleComponent.vue').default);
 Vue.component('home-component', require('./components/Home.vue').default);
 Vue.component('welcome-component', require('./components/Welcome.vue').default);
+
+// template components
+
+Vue.component('snackbar-component', require('./components/templates/snackbar.vue').default);
+
+
+// Event handling
+
+window.Fire = new Vue
 
 import router from "./router/router";
 

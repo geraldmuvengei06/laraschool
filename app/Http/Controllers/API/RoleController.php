@@ -19,7 +19,7 @@ class RoleController extends Controller
     public function index()
     {
         //
-        $roles = Role::latest()->get();
+        $roles = Role::all();
 
         return response()->json($roles, 200);
     }
