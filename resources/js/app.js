@@ -35,9 +35,10 @@ NProgress.configure({
     showSpinner: true,
 
 })
-
 window.NProgress = NProgress
 
+// state management
+import { store } from "./store/store"
 
 // const files = require.context('./', true, /\.vue$/i)
 // files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(key).default))
@@ -50,7 +51,7 @@ Vue.component('welcome-component', require('./components/Welcome.vue').default);
 
 // template components
 
-Vue.component('snackbar-component', require('./components/templates/snackbar.vue').default);
+Vue.component('snackbar-component', require('./components/partials/snackbar.vue').default);
 
 
 // Event handling
@@ -60,6 +61,7 @@ window.Fire = new Vue
 import router from "./router/router";
 
 const app = new Vue({
+    store,
     vuetify,
     el: '#app',
     router

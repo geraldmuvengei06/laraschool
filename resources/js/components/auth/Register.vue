@@ -84,7 +84,9 @@
                         <v-text-field
                             label="First"
                             name="first"
-                            prepend-icon="person"
+                            dense
+                            outlined
+                            append-icon="person"
                             type="first"
                             v-model="form.first"
                         />
@@ -102,6 +104,8 @@
                             label="Last"
                             name="last"
                             type="last"
+                            dense
+                            outlined
                             v-model="form.last"
                         />
                         <has-error :form="form" class="v-messages theme--light error--text" field="last"></has-error>
@@ -113,7 +117,9 @@
                         <v-text-field
                             label="Email"
                             name="email"
-                            prepend-icon="mail"
+                            dense
+                            outlined
+                            append-icon="mail"
                             type="email"
                             v-model="form.email"
                         />
@@ -130,7 +136,9 @@
                             id="password"
                             label="Password"
                             name="password"
-                            prepend-icon="lock"
+                            dense
+                            outlined
+                            append-icon="lock"
                             type="password"
                             v-model="form.password"
                         />
@@ -149,6 +157,8 @@
                             label="Confirm Password"
                             name="password_confirmation"
                             type="password"
+                            dense
+                            outlined
                             v-model="form.password_confirmation"
                         />
                         <has-error :form="form" class="v-messages theme--light error--text" field="password_confirmation"></has-error>

@@ -52,6 +52,7 @@
                 <v-toolbar
                   color="transparent"
                   light
+                  text
                   flat
                 >
                   <v-toolbar-title>{{ title }}</v-toolbar-title>
@@ -76,7 +77,9 @@
                     <v-text-field
                       label="Login"
                       name="login"
-                      prepend-icon="person"
+                      outlined
+                      dense
+                      append-icon="person"
                       type="email"
                       v-model="form.email"
                       :rules="emailRules"
@@ -86,7 +89,9 @@
                       id="password"
                       label="Password"
                       name="password"
-                      prepend-icon="lock"
+                      outlined
+                      dense
+                      append-icon="lock"
                       type="password"
                       v-model="form.password"
                       :rules="passwordRules"
@@ -94,14 +99,14 @@
                   
                 </v-card-text>
                 <v-card-actions>
-                  <v-btn text flat color="primary"  >Forgot password?</v-btn>
+                  <v-btn text  color="primary"  >Forgot password?</v-btn>
                   <v-spacer />
                   <v-btn color="primary" :loading="loading" @click="doLogin">Login</v-btn>
 
                 </v-card-actions>
                   <v-spacer></v-spacer>
 
-                  <v-btn flat text color="primary" class="mt-10" link :to="{ name: 'register' }">Don't have an account?</v-btn>
+                  <v-btn  text color="primary" class="mt-10" link :to="{ name: 'register' }">Don't have an account?</v-btn>
               </v-card>
             </v-form>
                 
@@ -179,11 +184,13 @@
       }
     },
 
-    mounted() {
+    
+
+    created() {
       axios.get('/user').then((res) => {
-        console.log(res);
         
         if(res != null || res != undefined){
+                
           document.location.href = '/home/dashboard'
         }
       })

@@ -5,7 +5,7 @@ namespace App\Http\Controllers\API;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Spatie\Permission\Models\Role;
-use Spatie\Permission\Model\Permission;
+use Spatie\Permission\Models\Permission;
 use App\User;
 
 
@@ -19,9 +19,13 @@ class RoleController extends Controller
     public function index()
     {
         //
-        $roles = Role::all();
+        $roles = Role::with('permissions')->get();
+        $permissions = Permission::get();
 
-        return response()->json($roles, 200);
+        return response()->json([
+            'roles' => $roles,
+            'permissions' => $permissions,
+        ], 200);
     }
 
  

@@ -34,6 +34,10 @@ Route::group(['middleware' => 'auth'], function () {
     
     Route::apiResource('settings', "API\SettingsController");
 
+    // users
+    Route::apiResource('users', "API\UserController");
+    Route::put('users/update-profile/{user}', "API\UserController@updateProfile")->name('users.update-profile');
+
     // roles
     Route::apiResource('roles', "API\RoleController");
     Route::post('assign-role-to-user', "API\RoleController@assignRoleToUser")->name('roles.assignRoleToUser');

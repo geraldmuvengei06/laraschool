@@ -21,11 +21,13 @@
           
           >
 
-            <v-card>
+            <v-card flat>
               <v-card-title>
                 Roles
                 <v-spacer></v-spacer>
                 <v-text-field
+                  dense
+                  outlined
                   v-model="search"
                   append-icon="search"
                   label="Search"
@@ -89,7 +91,7 @@
                   <v-btn
                     color="primary darken-1"
                     class="white--text"
-                    @click="permissions(item)"
+                    @click="editPermissions(item)"
                     small
                   >
                    
@@ -117,6 +119,8 @@
                   <v-col cols="12">
                     
                         <v-text-field
+                          dense
+                          outlined
                         label="Name*"
                         required
                         :rules="roleRules"
@@ -151,6 +155,8 @@
                   <v-col cols="12">
                     
                         <v-text-field
+                          dense
+                          outlined
                         label="Name*"
                         required
                         :rules="roleRules"
@@ -184,12 +190,22 @@
               <v-container grid-list-xs ma-2>
                 <v-row>
                 
-                  <v-col cols="3">
-                    
-                        <v-checkbox hide-details single-line label="Create role" v-model="value" value="value"></v-checkbox>
-                        <v-checkbox hide-details single-line label="Edit role" v-model="value" value="value"></v-checkbox>
-                    
+                  <v-col cols="3"
+                  lg="3"
+                  md="4"
+                  sm="6"
+                  xs="12"
+                  class="pa-0" 
+                  v-for="(perm, id) in permissions" :key="id">
+                      <v-checkbox  
+                        hide-details 
+                        single-line 
+                        :label="perm.name" 
+                        v-model="value"
+                        :value="getRoleValue(rolePermissions.id, perm.id)"
+                        @click="assignPermissiontoRole(role.id, perm.id)" ></v-checkbox>
                   </v-col>
+
 
                 </v-row>
               </v-container>
@@ -219,10 +235,7 @@ export default {
 
       // for loading table
       tableLoading: false,
-      // for checkbox
-      value: true,
-
-
+      
       // for snackbar
       message: '',
       type: '',
@@ -234,16 +247,29 @@ export default {
         id: '',
         name: '',
       }),
-      
+
+      // for checkbox
+      value: null,
+      rolePermissionForm: new Form({
+        role_id: '',
+        permission_id: '',
+      }),
+
+
+
+
       search: '',
       headers: [
         { text: 'Name', value: 'name', align: 'start' },
         { text: 'Model', value: 'guard_name' },
-        { text: 'Action', value: 'actions', sortable: false, align: 'end' }
+        { text: 'permissions', value: 'permissions.length' },
+        { text: 'Action', value: 'actions', sortable: false, align: 'center' }
       ],
 
       role: {},
       roles: [],
+      permissions: [],
+      rolePermissions: [],
       roleRules: [
           v => !!v || 'Name is required',
           v => v.length >= 4 || 'Name must be 4 characters or more'
@@ -298,16 +324,42 @@ export default {
         })
       },
 
-      permissions(item) {
+      editPermissions(item) {
         this.role = item
+        this.rolePermissions = this.role.permissions
         this.editRolePermissions = true
         
+      },
+
+      assignPermissiontoRole(role_id, permission_id){
+        
+        this.rolePermissionForm.role_id = role_id
+        this.rolePermissionForm.permission_id = permission_id
+
+        this.rolePermissionForm.post('/assign-permission-to-role').then((res) => {
+            this.message = res.data
+            this.type = 'success'
+            // emit a show snackbar event
+            Fire.$emit('showSnackbar')
+        }).catch((err) => {
+            this.message = err.response.data.message
+            this.type = 'error'
+            // emit a show snackbar event
+            Fire.$emit('showSnackbar')
+        })
+      },
+
+      getRoleValue(rolePermissions_id, perm_id){
+        if (rolePermissions_id == perm_id) {
+          this.value = true
+        }
       },
 
       getRoles() {
         this.tableLoading = true;
         axios.get('/roles').then((res) => {
-          this.roles = res.data          
+          this.roles = res.data.roles
+          this.permissions = res.data.permissions
         });
         this.tableLoading = false;
       },
