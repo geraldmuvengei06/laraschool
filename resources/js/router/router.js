@@ -4,6 +4,7 @@ Vue.use(VueRouter)
 
 import Login from '../components/Auth/Login.vue'
 import Register from '../components/Auth/Register.vue'
+import ForgotPassword from '../components/Auth/ForgotPassword.vue'
 import HomeContent from '../components/HomeContent.vue'
 
 import Profile from '../components/pages/Profile.vue'
@@ -36,18 +37,19 @@ let routes = [
     },
 
     {
+        path: '/forgot-password',
+        name: 'forgot-password',
+        component: ForgotPassword,
+        meta: {
+            title: 'Forgot Password',
+            description: 'laraschool Forgot Password'
+        }
+    },
+
+    {
         path: '/home',
         component: HomeContent,
         children: [
-            {
-                path: 'profile',
-                name: 'profile',
-                component: Profile,
-                meta: {
-                    title: 'Profile',
-                    description: 'Laraschool Profile',
-                }
-            },
             {
                 path: 'dashboard',
                 name: 'dashboard',
@@ -55,6 +57,15 @@ let routes = [
                 meta: {
                     title: 'Dashboard',
                     description: 'Laraschool dashboard',
+                }
+            },
+            {
+                path: 'profile',
+                name: 'profile',
+                component: Profile,
+                meta: {
+                    title: 'Profile',
+                    description: 'Laraschool Profile',
                 }
             },
             {

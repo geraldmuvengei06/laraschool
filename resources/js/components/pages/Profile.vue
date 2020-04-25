@@ -119,6 +119,7 @@
                                                             name="first"
                                                             type="first"
                                                             v-model="userForm.first"
+                                                            color="grey"
                                                         />
 
                                                     </v-col>

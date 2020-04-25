@@ -20,7 +20,7 @@ Route::middleware('auth')->get('/user', function (Request $request) {
 
 Route::get('/{path}', "WelcomeController@index")
     ->name('welcome')
-    ->where('path', "|login|register");
+    ->where('path', "|login|register|forgot-password");
 
 Route::get('/{any}', 'HomeController@index')
     ->name('home')
@@ -28,9 +28,9 @@ Route::get('/{any}', 'HomeController@index')
 
 Route::get('/admin', "AdminController@index")->name('admin');
 
-Auth::routes();
+Auth::routes(['verify' => true]);
 
-Route::group(['middleware' => 'auth'], function () {
+Route::group(['middleware' => ['auth', 'verified']], function () {
     
     Route::apiResource('settings', "API\SettingsController");
 

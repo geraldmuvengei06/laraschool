@@ -7,7 +7,6 @@
       >
         <v-row
           align="center"
-          justify="center"
         >
           <v-col
             cols="12"
@@ -89,8 +88,11 @@
                             append-icon="person"
                             type="first"
                             v-model="form.first"
+                            hide-details
                         />
-                        <has-error :form="form" class="v-messages theme--light error--text" field="first"></has-error>
+                        <div class="v-text-field__details"><div class="v-messages theme--light"><div class="v-messages__wrapper">
+                          <has-error :form="form" class="v-messages theme--light error--text" field="first"></has-error>
+                        </div></div></div>
 
                     </v-col>
 
@@ -107,9 +109,11 @@
                             dense
                             outlined
                             v-model="form.last"
+                            hide-details
                         />
-                        <has-error :form="form" class="v-messages theme--light error--text" field="last"></has-error>
-
+                        <div class="v-text-field__details"><div class="v-messages theme--light"><div class="v-messages__wrapper">
+                          <has-error :form="form" class="v-messages theme--light error--text" field="last"></has-error>
+                        </div></div></div>
                     </v-col>
 
                     <v-col cols="12">
@@ -122,8 +126,11 @@
                             append-icon="mail"
                             type="email"
                             v-model="form.email"
+                            hide-details
                         />
-                        <has-error :form="form" class="v-messages theme--light error--text" field="email"></has-error>
+                        <div class="v-text-field__details"><div class="v-messages theme--light"><div class="v-messages__wrapper">
+                          <has-error :form="form" class="v-messages theme--light error--text" field="email"></has-error>
+                        </div></div></div>
                     </v-col>
 
                     <v-col cols="12"
@@ -141,8 +148,11 @@
                             append-icon="lock"
                             type="password"
                             v-model="form.password"
+                            hide-details
                         />
-                        <has-error :form="form" class="v-messages theme--light error--text" field="password"></has-error>
+                        <div class="v-text-field__details"><div class="v-messages theme--light"><div class="v-messages__wrapper">
+                          <has-error :form="form" class="v-messages theme--light error--text" field="password"></has-error>
+                        </div></div></div>
                     </v-col>
 
 
@@ -181,6 +191,7 @@
           
         </v-row>
       </v-container>
+      <snackbar-component :message="message"  :type="type"></snackbar-component>
     </v-content>
   </v-app>
 </template>
@@ -195,6 +206,8 @@
       return {
         title: "Register here",
         loading: false,
+        type: '',
+        message: '',
       
         form: new Form({
           first: '',
@@ -221,11 +234,17 @@
           this.loading = true
           
           this.form.post('/register').then((res) => {
-            document.location.href = '/login'
+            this.$router.push('/login')
+            this.message = "Registration successiful, verify your email to login to your account."
+            this.type = 'success'
+            Fire.$emit('showSnackbar')
             this.form.reset()
             this.loading = false
           }).catch((err) => {
               this.loading = false
+              this.message = err.response.data.message
+              this.type = 'error'
+              Fire.$emit('showSnackbar')
 
           })
 
@@ -262,9 +281,10 @@
   .is-background{
     // background: #9652ff;
     
+      height: 100vh;
     .is-background-content{
       display: flex;
-      height: 100vh;
+            height: 100vh;
       justify-content: center;
       align-items: center;
       flex-direction: column;
@@ -292,5 +312,7 @@
         border-radius: 50%;
       }
     }
+
+   
   
 </style>

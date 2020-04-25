@@ -47,13 +47,16 @@ class UserController extends Controller
                     'first'  => 'required|string|max:255',
                     'last'  => 'required|string|max:255',
                     'email' => 'required|string|email|max:255|unique:users,email,'.$request->id,
-                    'phone' => 'required|numeric|unique:users,phone,'.$request->id
+                    'phone' => 'required|numeric|unique:users,phone,'.$request->id,
+                    'confirmed' => 'nullable|boolean'
+
                 ]);
         
                 $user->first = $request->first;
                 $user->last = $request->last;
                 $user->email = $request->email;
                 $user->phone = $request->phone;
+                $user->confirmed = $request->confirmed;
                 $user->save();
     
                 return response()->json('Success.. User updated!', 200);
@@ -78,7 +81,6 @@ class UserController extends Controller
                 'id_number' => 'required|numeric|unique:users,id_number,'.$request->id,
                 'profession'  => 'required|string|max:255',
                 'address'  => 'required|string|max:255',
-
             ]);
     
             $user->initials = $request->initials;

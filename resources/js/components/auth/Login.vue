@@ -11,6 +11,7 @@
         >
           <v-col
             cols="12"
+            lg="9"
             md="8"
             sm="6"
             class="hidden-xs-only is-background primary"
@@ -43,8 +44,9 @@
         
           <v-col
             cols="12"
-            sm="6"
+            lg="3"
             md="4"
+            sm="6"
             xs="12"
           >
             <v-form ref="form" @keydown="form.onKeydown($event)" @submit.prevent="doLogin()" >
@@ -83,6 +85,7 @@
                       type="email"
                       v-model="form.email"
                       :rules="emailRules"
+                      width="200"
                     />
 
                     <v-text-field
@@ -99,7 +102,7 @@
                   
                 </v-card-text>
                 <v-card-actions>
-                  <v-btn text  color="primary"  >Forgot password?</v-btn>
+                  <v-btn text link :to="{ name: 'forgot-password' }"  color="primary"  >Forgot password?</v-btn>
                   <v-spacer />
                   <v-btn color="primary" :loading="loading" @click="doLogin">Login</v-btn>
 
@@ -116,15 +119,8 @@
         </v-row>
       </v-container>
 
-      <v-snackbar
-        v-model="isErrorSnackbar"
-        color="error"
-        error
-        top
-      >
-        {{ error }}
-        <v-btn text color="white" @click.native="isErrorSnackbar = false">Close</v-btn>
-      </v-snackbar>
+      <snackbar-component :message="message"  :type="type"></snackbar-component>
+
     </v-content>
   </v-app>
 </template>
@@ -139,8 +135,8 @@
       return {
         title : 'Login to your account',
         loading: false,
-        isErrorSnackbar: false,
-        error: '',
+        message: '',
+        type: '',
       
         form: new Form({
           email: '',
@@ -165,20 +161,23 @@
           this.loading = true
           
           this.form.post('/login').then((res) => {
-            document.location.href = '/home/dashboard'
+            document.location.href = '/home'
             NProgress.done()
             this.loading = false
           }).catch((err) => {
               this.loading = false
-              this.error = err.response.data.message
+              this.message = err.response.data.message
+              this.type = 'error'
+              Fire.$emit('showSnackbar')
               // this.error = err.response.data.errors
               this.isErrorSnackbar = true
 
           })
 
         }else{
-          this.error = "The email and password field are required."
-          this.isErrorSnackbar = true
+           this.message = "The email and password field are required."
+            this.type = 'error'
+            Fire.$emit('showSnackbar')
         }
         
       }
@@ -191,7 +190,7 @@
         
         if(res != null || res != undefined){
                 
-          document.location.href = '/home/dashboard'
+          document.location.href = '/home'
         }
       })
     },

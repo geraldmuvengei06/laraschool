@@ -259,10 +259,23 @@
                           label="Role"
                           item-text="test"
                           item-value="test"
+                          outlined
+                          dense
 
                         >
                         
                         </v-select>
+                    </v-col>
+
+                    <v-col cols="12"
+                    lg="6"
+                    md="6"
+                    sm="12"
+                    xs="12"
+                    class="py-0"
+                    >
+                        
+                        <v-switch class="my-2" color="success" v-model="userForm.confirmed" :label="(userForm.confirmed ? 'Confirmed' : 'Not Confirmed')"></v-switch>
                     </v-col>
 
 
@@ -323,7 +336,7 @@
       </v-dialog>
 
       <!-- The snackbar components takes message, and type props -->
-      <snackbar-component :message="message"  :type="type"></snackbar-component>
+    <snackbar-component :message="message"  :type="type"></snackbar-component>
     </div>
 </template>
 
@@ -352,6 +365,7 @@ export default {
         email: '',
         phone: '',
         role: '',
+        confirmed: false,
       }),
       nameRules: [
         v => !!v || 'Name is required',
@@ -389,11 +403,6 @@ export default {
     }),
 
     methods: {
-    // full user name
-      logInput(){
-        console.log(this.userForm.role);
-        
-      },
     
       getUserName(item){
           const newLocal=item.initials? item.initials:''
@@ -410,9 +419,12 @@ export default {
       editUser (item){
         this.editUserDialog = true
         this.userForm.fill(item)
+                console.log(this.userForm.confirmed);
+
       },
 
       updateUser(id){
+        
         this.userForm.put('/users/' + id).then((res) => {
           this.message = res.data
           this.type = 'success'
