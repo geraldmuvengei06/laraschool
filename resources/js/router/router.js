@@ -2,9 +2,9 @@ import Vue from 'vue'
 import VueRouter from 'vue-router'
 Vue.use(VueRouter)
 
-import Login from '../components/Auth/Login.vue'
-import Register from '../components/Auth/Register.vue'
-import ForgotPassword from '../components/Auth/ForgotPassword.vue'
+import Login from '../components/auth/Login.vue'
+import Register from '../components/auth/Register.vue'
+import ForgotPassword from '../components/auth/ForgotPassword.vue'
 import HomeContent from '../components/HomeContent.vue'
 
 import Profile from '../components/pages/Profile.vue'

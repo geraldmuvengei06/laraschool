@@ -29,6 +29,15 @@ class CreateUsersTable extends Migration
             $table->rememberToken();
             $table->timestamps();
         });
+
+        DB::table('users')->insert([
+            'first' => 'Sys',
+            'last' => 'Admin',
+            'email' => 'admin@laraschool.com',
+            'confirmed' => true,
+            'email_verified_at' => \Carbon\Carbon::now(),
+            'password' => bcrypt('password3700'),
+        ]);
     }
 
     /**

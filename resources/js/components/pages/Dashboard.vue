@@ -97,7 +97,7 @@
 
             <v-card>
               <v-card-title>
-                Fee Balances
+                Fee Bal
                 <v-spacer></v-spacer>
                 <v-text-field
                   v-model="search"
@@ -147,7 +147,7 @@ export default {
       cards: [
         ['white--text darken-1', 'person', '123', 'Students', 'primary'],
         ['white--text darken-1', 'euro', '123k', 'Fees Paid', 'success'],
-        ['white--text darken-1', 'euro', '13k', 'Fees Balance', 'warning'],
+        ['white--text darken-1', 'euro', '13k', 'Fees Bal', 'warning'],
         ['white--text darken-1', 'dashboard', 'B+', 'Mean Grade', 'purple'],
       ],
 

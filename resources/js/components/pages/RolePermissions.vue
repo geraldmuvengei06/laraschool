@@ -1,7 +1,7 @@
 <template>
     <div>
         <v-container
-        class="fill-height"
+        class="fill-height is-roles"
         fluid
       >
         <v-row
@@ -125,8 +125,15 @@
                         required
                         :rules="roleRules"
                         v-model="roleForm.name"
+                        hide-details
                         ></v-text-field>
-                    
+                        <div class="v-text-field__details">
+                            <div class="v-messages theme--light">
+                                <div class="v-messages__wrapper">
+                                    <has-error :form="roleForm" class="v-messages theme--light error--text" field="name"></has-error>
+                                </div>
+                            </div>
+                        </div>
                   </v-col>
 
                 </v-row>
@@ -157,11 +164,19 @@
                         <v-text-field
                           dense
                           outlined
-                        label="Name*"
-                        required
-                        :rules="roleRules"
-                        v-model="roleForm.name"
-                        ></v-text-field>
+                          label="Name*"
+                          required
+                          :rules="roleRules"
+                          v-model="roleForm.name"
+                          hide-details
+                          ></v-text-field>
+                          <div class="v-text-field__details">
+                              <div class="v-messages theme--light">
+                                  <div class="v-messages__wrapper">
+                                      <has-error :form="roleForm" class="v-messages theme--light error--text" field="name"></has-error>
+                                  </div>
+                              </div>
+                          </div>
                     
                   </v-col>
 
@@ -299,7 +314,7 @@ export default {
           this.getRoles();
           this.editRoleDialog = false
         }).catch((err) => {
-          this.message = res.data
+          this.message = err.response.data.message
           this.type = 'error'
           Fire.$emit('showSnackbar')
           this.getRoles();

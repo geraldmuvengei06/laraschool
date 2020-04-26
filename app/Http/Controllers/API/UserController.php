@@ -8,6 +8,7 @@ use Spatie\Permission\Models\Role;
 use Spatie\Permission\Models\Permission;
 use App\User;
 use Auth;
+use Illuminate\Support\Facades\Hash;
 
 
 
@@ -47,7 +48,7 @@ class UserController extends Controller
                     'first'  => 'required|string|max:255',
                     'last'  => 'required|string|max:255',
                     'email' => 'required|string|email|max:255|unique:users,email,'.$request->id,
-                    'phone' => 'required|numeric|unique:users,phone,'.$request->id,
+                    'phone' => 'nullable|numeric|unique:users,phone,'.$request->id,
                     'confirmed' => 'nullable|boolean'
 
                 ]);
@@ -95,6 +96,32 @@ class UserController extends Controller
 
             return response()->json('Success.. Profile updated!', 200);
         }
+    }
+
+    public function updatePassword(Request $request, $id)
+    {
+        # code...
+        $user = User::findOrFail($id);
+        if ($user != null) {
+            $request->validate([
+                'old_password' => ['required', 'string'],
+                'password' => ['required', 'string', 'min:8', 'confirmed'],
+            ]);
+
+            if (Hash::check($request->old_password, $user->password)) {
+                # code...
+                $user->password = bcrypt($request->password);
+                $user->save();
+
+                return response()->json('Success.. Password updated!', 200);
+            }else{
+                return response()->json('Error.. Old password does not match our records.', 403);
+            }
+        }else{
+            return response()->json('Error.. User not found.', 403);
+
+        }
+        
     }
 
     public function destroy($id)

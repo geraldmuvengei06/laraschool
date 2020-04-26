@@ -1,7 +1,7 @@
 <template>
     <div>
         <v-container
-        class="fill-height"
+        class="fill-height is-profile"
         fluid
       >
         <v-row
@@ -25,7 +25,7 @@
                     xs="12"
                     >
 
-                        <v-card flat class="text-center ">
+                        <v-card flat elevation="1" class="text-center ">
                             <v-responsive class="py-4">
                             <v-avatar
                                 size="100"
@@ -85,7 +85,7 @@
                             <v-tabs-items v-model="userTabs">
                                 <v-tab-item
                                 value="edit">
-                                    <v-card flat>
+                                    <v-card flat class="pb-4">
                                         <v-card-text>
                                             <v-form ref="roleForm" @submit.prevent="updateUser" >
                                                 <v-row>
@@ -102,7 +102,15 @@
                                                             v-model="userForm.initials"
                                                             label="Initials"
                                                             overflow="hidden"
+                                                            hide-details
                                                         ></v-select>
+                                                        <div class="v-text-field__details">
+                                                            <div class="v-messages theme--light">
+                                                                <div class="v-messages__wrapper">
+                                                                    <has-error :form="userForm" class="v-messages theme--light error--text" field="initials"></has-error>
+                                                                </div>
+                                                            </div>
+                                                        </div>
                                                     </v-col>
 
                                                     <v-col cols="12"
@@ -113,14 +121,22 @@
                                                     class="py-1">
 
                                                         <v-text-field
+                                                        
                                                             dense
                                                             outlined
                                                             label="First"
                                                             name="first"
                                                             type="first"
                                                             v-model="userForm.first"
-                                                            color="grey"
+                                                            hide-details
                                                         />
+                                                        <div class="v-text-field__details">
+                                                            <div class="v-messages theme--light">
+                                                                <div class="v-messages__wrapper">
+                                                                    <has-error :form="userForm" class="v-messages theme--light error--text" field="first"></has-error>
+                                                                </div>
+                                                            </div>
+                                                        </div>
 
                                                     </v-col>
 
@@ -132,13 +148,22 @@
                                                     class="py-1">
 
                                                         <v-text-field
+                                                        
                                                             dense
                                                             outlined
                                                             label="Last"
                                                             name="last"
                                                             type="last"
                                                             v-model="userForm.last"
+                                                            hide-details
                                                         />
+                                                        <div class="v-text-field__details">
+                                                            <div class="v-messages theme--light">
+                                                                <div class="v-messages__wrapper">
+                                                                    <has-error :form="userForm" class="v-messages theme--light error--text" field="last"></has-error>
+                                                                </div>
+                                                            </div>
+                                                        </div>
 
                                                     </v-col>
 
@@ -150,6 +175,7 @@
                                                     class="py-1">
                                                         
                                                         <v-text-field
+                                                        
                                                             dense
                                                             outlined
                                                             label="Email"
@@ -157,7 +183,15 @@
                                                             append-icon="mail"
                                                             type="email"
                                                             v-model="userForm.email"
+                                                            hide-details
                                                         />
+                                                        <div class="v-text-field__details">
+                                                            <div class="v-messages theme--light">
+                                                                <div class="v-messages__wrapper">
+                                                                    <has-error :form="userForm" class="v-messages theme--light error--text" field="email"></has-error>
+                                                                </div>
+                                                            </div>
+                                                        </div>
                                                     </v-col>
 
                                                     <v-col cols="12"
@@ -168,6 +202,7 @@
                                                     class="py-1">
                                                         
                                                         <v-text-field
+                                                        
                                                             dense
                                                             outlined
                                                             label="Phone"
@@ -175,7 +210,15 @@
                                                             append-icon="phone"
                                                             type="phone"
                                                             v-model="userForm.phone"
+                                                            hide-details
                                                         />
+                                                        <div class="v-text-field__details">
+                                                            <div class="v-messages theme--light">
+                                                                <div class="v-messages__wrapper">
+                                                                    <has-error :form="userForm" class="v-messages theme--light error--text" field="phone"></has-error>
+                                                                </div>
+                                                            </div>
+                                                        </div>
                                                     </v-col>
 
                                                      <v-col cols="12"
@@ -186,6 +229,7 @@
                                                     class="py-1">
                                                         
                                                         <v-text-field
+                                                        
                                                             dense
                                                             outlined
                                                             label="ID Number"
@@ -193,7 +237,16 @@
                                                             append-icon="person"
                                                             type="numeric"
                                                             v-model="userForm.id_number"
+                                                            hide-details
                                                         />
+                                                        <div class="v-text-field__details">
+                                                            <div class="v-messages theme--light">
+                                                                <div class="v-messages__wrapper">
+                                                                    <has-error :form="userForm" class="v-messages theme--light error--text" field="id_number"></has-error>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        
                                                     </v-col>
 
                                                      <v-col cols="12"
@@ -204,6 +257,7 @@
                                                     class="py-1">
                                                         
                                                         <v-text-field
+                                                        
                                                             dense
                                                             outlined
                                                             label="Profession"
@@ -211,7 +265,15 @@
                                                             append-icon="grade"
                                                             type="text"
                                                             v-model="userForm.profession"
+                                                            hide-details
                                                         />
+                                                        <div class="v-text-field__details">
+                                                            <div class="v-messages theme--light">
+                                                                <div class="v-messages__wrapper">
+                                                                    <has-error :form="userForm" class="v-messages theme--light error--text" field="profession"></has-error>
+                                                                </div>
+                                                            </div>
+                                                        </div>
                                                     </v-col>
 
                                                     <v-col cols="12"
@@ -230,7 +292,15 @@
                                                             v-model="userForm.address"
                                                             dense
                                                             rows="2"
+                                                            hide-details
                                                         />
+                                                        <div class="v-text-field__details">
+                                                            <div class="v-messages theme--light">
+                                                                <div class="v-messages__wrapper">
+                                                                    <has-error :form="userForm" class="v-messages theme--light error--text" field="address"></has-error>
+                                                                </div>
+                                                            </div>
+                                                        </div>
                                                     </v-col>
                                                     
                                                 </v-row>
@@ -244,9 +314,9 @@
                                 <v-tab-item
                                 value="password">
 
-                                    <v-card flat>
+                                    <v-card class="pb-4" flat>
                                         <v-card-text>
-                                            <v-form ref="roleForm" @submit.prevent="updateUser" >
+                                            <v-form ref="roleForm" @submit.prevent="updatePassword" >
                                                 <v-row>
                                                    
 
@@ -258,14 +328,23 @@
                                                     class="py-1">
 
                                                         <v-text-field
+                                                        
                                                             dense
                                                             outlined
                                                             label="Old Password"
                                                             name="old_password"
                                                             type="password"
-                                                            v-model="userForm.old_password"
+                                                            v-model="passwordForm.old_password"
                                                             append-icon="lock"
+                                                            hide-details
                                                         />
+                                                        <div class="v-text-field__details">
+                                                            <div class="v-messages theme--light">
+                                                                <div class="v-messages__wrapper">
+                                                                    <has-error :form="passwordForm" class="v-messages theme--light error--text" field="old_password"></has-error>
+                                                                </div>
+                                                            </div>
+                                                        </div>
 
                                                     </v-col>
 
@@ -277,14 +356,24 @@
                                                     class="py-1">
 
                                                         <v-text-field
+                                                        
                                                             dense
                                                             outlined
                                                             label="New Password"
                                                             name="password"
                                                             type="password"
-                                                            v-model="userForm.password"
+                                                            v-model="passwordForm.password"
                                                             append-icon="lock"
+                                                            hide-details
                                                         />
+
+                                                        <div class="v-text-field__details">
+                                                            <div class="v-messages theme--light">
+                                                                <div class="v-messages__wrapper">
+                                                                    <has-error :form="passwordForm" class="v-messages theme--light error--text" field="password"></has-error>
+                                                                </div>
+                                                            </div>
+                                                        </div>
 
                                                     </v-col>
 
@@ -296,14 +385,16 @@
                                                     class="py-1">
 
                                                         <v-text-field
+                                                        
                                                             dense
                                                             outlined
                                                             label="Confirm Password"
                                                             name="password_confirmation"
                                                             type="password"
-                                                            v-model="userForm.password_confirmation"
+                                                            v-model="passwordForm.password_confirmation"
                                                             append-icon="lock"
                                                         />
+                                                        
 
                                                     </v-col>
                                                     
@@ -311,7 +402,7 @@
                                             </v-form>
                                         </v-card-text>
                                         <v-card-actions>
-                                            <v-btn color="success darken-1" class="white--text ml-2" :loading="loading" @click="updateUser(userForm.id)" >Update</v-btn>
+                                            <v-btn color="success darken-1" class="white--text ml-2" :loading="loading" @click="updatePassword(userForm.id)" >Update</v-btn>
                                         </v-card-actions>
                                     </v-card>
                                     
@@ -356,6 +447,12 @@ export default {
             address: '',
             profession: '',
         }),
+
+        passwordForm: new Form({
+            old_password: '',
+            password: '',
+            password_confirmation: '',
+        })
       }
     },
 
@@ -367,15 +464,32 @@ export default {
                 Fire.$emit('showSnackbar')
                 this.editUserDialog = false
             }).catch((err) => {
-                this.message = err.response.data
+                this.message = err.response.data.message
                 this.type = 'error'
                 Fire.$emit('showSnackbar')
             })
         },
+
+        updatePassword(id){
+            this.loading = true
+            this.passwordForm.put('/users/update-password/' + id).then((res) => {
+                this.message = res.data
+                this.type = 'success'
+                Fire.$emit('showSnackbar')
+                this.editUserDialog = false
+            }).catch((err) => {
+                this.message = err.response.data.message
+                this.type = 'error'
+                Fire.$emit('showSnackbar')
+            })
+            this.loading = false
+            
+        }
     },
 
     mounted() {
         this.userForm.fill(this.$store.getters.user)
+        this.passwordForm.reset()
     }
 }
 </script>

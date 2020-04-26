@@ -36,6 +36,7 @@ class LoginController extends Controller
      */
     public function __construct()
     {
+        // email_verified_at
         $this->middleware(['guest'])->except('logout');
     }
 

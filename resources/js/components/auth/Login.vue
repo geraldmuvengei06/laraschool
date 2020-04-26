@@ -86,7 +86,16 @@
                       v-model="form.email"
                       :rules="emailRules"
                       width="200"
+                      hide-details
+
                     />
+                    <div class="v-text-field__details">
+                        <div class="v-messages theme--light">
+                            <div class="v-messages__wrapper">
+                                <has-error :form="form" class="v-messages theme--light error--text" field="email"></has-error>
+                            </div>
+                        </div>
+                    </div>
 
                     <v-text-field
                       id="password"
@@ -98,7 +107,15 @@
                       type="password"
                       v-model="form.password"
                       :rules="passwordRules"
+                      hide-details
                     />
+                    <div class="v-text-field__details">
+                        <div class="v-messages theme--light">
+                            <div class="v-messages__wrapper">
+                                <has-error :form="form" class="v-messages theme--light error--text" field="password"></has-error>
+                            </div>
+                        </div>
+                    </div>
                   
                 </v-card-text>
                 <v-card-actions>

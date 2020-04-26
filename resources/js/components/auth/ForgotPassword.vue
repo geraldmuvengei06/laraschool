@@ -86,7 +86,15 @@
                       v-model="form.email"
                       :rules="emailRules"
                       width="200"
+                      hide-details
                     />
+                    <div class="v-text-field__details">
+                        <div class="v-messages theme--light">
+                            <div class="v-messages__wrapper">
+                                <has-error :form="form" class="v-messages theme--light error--text" field="email"></has-error>
+                            </div>
+                        </div>
+                    </div>
 
                     
                   <v-btn  block color="primary" :loading="loading" @click="doForgotPass">Send Password Reset link</v-btn>
@@ -145,7 +153,7 @@
             Fire.$emit('showSnackbar')
           }).catch((err) => {
               this.loading = false
-              this.message = err.response.data
+              this.message = err.response.data.message
               this.type = 'error'
               Fire.$emit('showSnackbar')
           })

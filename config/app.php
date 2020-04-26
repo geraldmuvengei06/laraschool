@@ -166,7 +166,7 @@ return [
         Illuminate\View\ViewServiceProvider::class,
 
         /*
-         * Package Service Providers...
+         * Papass_3700ckage Service Providers...
          */
 
         /*

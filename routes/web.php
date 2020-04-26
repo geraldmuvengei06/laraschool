@@ -37,6 +37,7 @@ Route::group(['middleware' => ['auth', 'verified']], function () {
     // users
     Route::apiResource('users', "API\UserController");
     Route::put('users/update-profile/{user}', "API\UserController@updateProfile")->name('users.update-profile');
+    Route::put('users/update-password/{user}', "API\UserController@updatePassword")->name('users.update-password');
 
     // roles
     Route::apiResource('roles', "API\RoleController");

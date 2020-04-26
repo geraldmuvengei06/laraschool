@@ -1,7 +1,7 @@
 <template>
     <div>
         <v-container
-        class="fill-height"
+        class="fill-height is-users"
         fluid
       >
         <v-row
@@ -36,14 +36,14 @@
                 ></v-text-field>
                 <v-spacer></v-spacer>
 
-                <v-btn
+                <!-- <v-btn
                   color="success"
                   class="white--text has-margin-top"
                   fab
                   @click="dialog = !dialog"
                 >
                   <v-icon dark>add</v-icon>
-                </v-btn>
+                </v-btn> -->
                 
                 
               </v-card-title>
@@ -145,7 +145,15 @@
                         required
                         :rules="nameRules"
                         v-model="userForm.name"
+                        hide-details
                         ></v-text-field>
+                        <div class="v-text-field__details">
+                            <div class="v-messages theme--light">
+                                <div class="v-messages__wrapper">
+                                    <has-error :form="userForm" class="v-messages theme--light error--text" field="name"></has-error>
+                                </div>
+                            </div>
+                        </div>
                     
                   </v-col>
 
@@ -186,7 +194,15 @@
                             append-icon="person"
                             type="first"
                             v-model="userForm.first"
+                            hide-details
                         />
+                        <div class="v-text-field__details">
+                            <div class="v-messages theme--light">
+                                <div class="v-messages__wrapper">
+                                    <has-error :form="userForm" class="v-messages theme--light error--text" field="first"></has-error>
+                                </div>
+                            </div>
+                        </div>
 
                     </v-col>
 
@@ -204,7 +220,15 @@
                             name="last"
                             type="last"
                             v-model="userForm.last"
+                            hide-details
                         />
+                        <div class="v-text-field__details">
+                            <div class="v-messages theme--light">
+                                <div class="v-messages__wrapper">
+                                    <has-error :form="userForm" class="v-messages theme--light error--text" field="last"></has-error>
+                                </div>
+                            </div>
+                        </div>
 
                     </v-col>
 
@@ -223,7 +247,15 @@
                             append-icon="mail"
                             type="email"
                             v-model="userForm.email"
+                            hide-details
                         />
+                        <div class="v-text-field__details">
+                            <div class="v-messages theme--light">
+                                <div class="v-messages__wrapper">
+                                    <has-error :form="userForm" class="v-messages theme--light error--text" field="email"></has-error>
+                                </div>
+                            </div>
+                        </div>
                     </v-col>
 
                     <v-col cols="12"
@@ -241,7 +273,15 @@
                             append-icon="phone"
                             type="phone"
                             v-model="userForm.phone"
+                            hide-details
                         />
+                        <div class="v-text-field__details">
+                            <div class="v-messages theme--light">
+                                <div class="v-messages__wrapper">
+                                    <has-error :form="userForm" class="v-messages theme--light error--text" field="phone"></has-error>
+                                </div>
+                            </div>
+                        </div>
                     </v-col>
 
                     <v-col cols="12"
@@ -432,7 +472,7 @@ export default {
           this.getUsers();
           this.editUserDialog = false
         }).catch((err) => {
-          this.message = err.response.data
+          this.message = err.response.data.message
           this.type = 'error'
           Fire.$emit('showSnackbar')
           this.getUsers();
