@@ -2,106 +2,102 @@
     <div>
         <v-container
         class="fill-height is-settings"
-        fluid
       >
         <v-row
         >
           <v-col
           cols="12"
-          lg="3"
-          md="4"
+          lg="2"
+          md="3"
           sm="4"
           xs="12"
           class="col-has-margin-top"
-          
+          align="start"
           >
-            <v-card flat>
-              <v-tabs
-                v-model="settingsTabs"
-                color="success"
-                light
-                slider-color="success lighten2"
-                vertical
-                align="center"
-              >
-
-              <v-tabs-slider></v-tabs-slider>
-                  <v-tab href="#appsettings">
-                      <v-icon class="pr-1" >dashboard</v-icon>
-                      <span>App Settings</span>
-                  </v-tab>
-                  <v-tab href="#mailsettings">
-                      <v-icon class="pr-1">mail</v-icon>
-                      <span>Mail Settings</span>
-                  </v-tab>
-
-                  <v-tab href="#messagesettings">
-                      <v-icon class="pr-1">mail</v-icon>
-                      <span>SMS Settings</span>
-                  </v-tab>
-
+            <v-tabs vertical v-model="settingsTabs">
+              <v-tab href="#app_settings">
+                <!-- <v-icon left>mdi-setting</v-icon> -->
+                App Settings
+              </v-tab>
+              <v-tab href="#sms_settings">
+                <!-- <v-icon left>mdi-lock</v-icon> -->
+                Sms Setings
+              </v-tab>
+              <v-tab href="#email_settings">
+                <!-- <v-icon left>mdi-access-point</v-icon> -->
+                Email Settings
+              </v-tab>
               </v-tabs>
-
-            </v-card>
           </v-col>
-
 
           <v-col
           cols="12"
-          lg="9"
-          md="8"
+          lg="10"
+          md="9"
           sm="8"
           xs="12"
           class="col-has-margin-top"
           >
-            <v-card flat>
-              <v-card-text>
-                <v-tabs-items v-model="settingsTabs">
-                  <v-tab-item
-                  value="appsettings">
-                      <v-card flat class="pb-4">
-                        <v-card-title primary-title>
-                          App Settings
-                        </v-card-title>
-                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Perferendis rerum, consequatur sunt autem eius temporibus accusantium aliquam quibusdam iure. Amet consequuntur error libero consequatur quo veritatis, natus adipisci nisi dolores.
-                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Exercitationem asperiores molestias similique optio corporis quas quod voluptatibus modi cumque ad possimus rem facilis accusantium voluptas atque culpa adipisci, sint nisi!
-                          Lorem ipsum, dolor sit amet consectetur adipisicing elit. Adipisci, itaque, temporibus aspernatur mollitia nisi numquam ab sit aut quod, fugiat animi! Quo ipsa ipsum tenetur tempore odit facere. Error, officiis.
-                      </v-card>
-                  </v-tab-item>
-                  <v-tab-item
-                  value="mailsettings">
+            <v-tabs-items v-model="settingsTabs">
+              
+              <v-tab-item value="app_settings">
+                <v-card flat>
+                  <v-card-text>
+                    <p>
+                      Sed aliquam ultrices mauris. Donec posuere vulputate arcu. Morbi ac felis. Etiam feugiat lorem non metus. Sed a libero.
+                    </p>
 
-                      <v-card class="pb-4" flat>
-                          <v-card-title primary-title>
-                            Mail Settings
-                          </v-card-title>
-                          Lorem ipsum dolor sit, amet consectetur adipisicing elit. Rem eos expedita aspernatur accusamus, harum recusandae, suscipit aperiam, corporis nemo quisquam libero et hic vitae numquam sed voluptatibus explicabo qui debitis.
-                          Lorem ipsum dolor sit, amet consectetur adipisicing elit. Rem eos expedita aspernatur accusamus, harum recusandae, suscipit aperiam, corporis nemo quisquam libero et hic vitae numquam sed voluptatibus explicabo qui debitis.
-                          Lorem ipsum dolor sit, amet consectetur adipisicing elit. Rem eos expedita aspernatur accusamus, harum recusandae, suscipit aperiam, corporis nemo quisquam libero et hic vitae numquam sed voluptatibus explicabo qui debitis.
-                      </v-card>
-                      
-                  </v-tab-item>
+                    <p>
+                      Nam ipsum risus, rutrum vitae, vestibulum eu, molestie vel, lacus. Aenean tellus metus, bibendum sed, posuere ac, mattis non, nunc. Aliquam lobortis. Aliquam lobortis. Suspendisse non nisl sit amet velit hendrerit rutrum.
+                    </p>
 
-                  <v-tab-item
-                  value="messagesettings">
+                    <p class="mb-0">
+                      Phasellus dolor. Fusce neque. Fusce fermentum odio nec arcu. Pellentesque libero tortor, tincidunt et, tincidunt eget, semper nec, quam. Phasellus blandit leo ut odio.
+                    </p>
+                  </v-card-text>
+                </v-card>
+              </v-tab-item>
+              <v-tab-item value="sms_settings">
+                <v-card flat>
+                  <v-card-text>
+                    <p>
+                      Morbi nec metus. Suspendisse faucibus, nunc et pellentesque egestas, lacus ante convallis tellus, vitae iaculis lacus elit id tortor. Sed mollis, eros et ultrices tempus, mauris ipsum aliquam libero, non adipiscing dolor urna a orci. Curabitur ligula sapien, tincidunt non, euismod vitae, posuere imperdiet, leo. Nunc sed turpis.
+                    </p>
 
-                      <v-card class="pb-4" flat>
-                          <v-card-title primary-title>
-                            Message Settings
-                          </v-card-title>
-                          Lorem ipsum dolor sit, amet consectetur adipisicing elit. Rem eos expedita aspernatur accusamus, harum recusandae, suscipit aperiam, corporis nemo quisquam libero et hic vitae numquam sed voluptatibus explicabo qui debitis.
-                          Lorem ipsum dolor sit, amet consectetur adipisicing elit. Rem eos expedita aspernatur accusamus, harum recusandae, suscipit aperiam, corporis nemo quisquam libero et hic vitae numquam sed voluptatibus explicabo qui debitis.
-                          Lorem ipsum dolor sit, amet consectetur adipisicing elit. Rem eos expedita aspernatur accusamus, harum recusandae, suscipit aperiam, corporis nemo quisquam libero et hic vitae numquam sed voluptatibus explicabo qui debitis.
-                      </v-card>
-                      
-                  </v-tab-item>
+                    <p>
+                      Suspendisse feugiat. Suspendisse faucibus, nunc et pellentesque egestas, lacus ante convallis tellus, vitae iaculis lacus elit id tortor. Proin viverra, ligula sit amet ultrices semper, ligula arcu tristique sapien, a accumsan nisi mauris ac eros. In hac habitasse platea dictumst. Fusce ac felis sit amet ligula pharetra condimentum.
+                    </p>
 
-                 
-                </v-tabs-items>
-              </v-card-text>
-            </v-card>
+                    <p>
+                      Sed consequat, leo eget bibendum sodales, augue velit cursus nunc, quis gravida magna mi a libero. Nam commodo suscipit quam. In consectetuer turpis ut velit. Sed cursus turpis vitae tortor. Aliquam eu nunc.
+                    </p>
+
+                    <p>
+                      Etiam ut purus mattis mauris sodales aliquam. Ut varius tincidunt libero. Aenean viverra rhoncus pede. Duis leo. Fusce fermentum odio nec arcu.
+                    </p>
+
+                    <p class="mb-0">
+                      Donec venenatis vulputate lorem. Aenean viverra rhoncus pede. In dui magna, posuere eget, vestibulum et, tempor auctor, justo. Fusce commodo aliquam arcu. Suspendisse enim turpis, dictum sed, iaculis a, condimentum nec, nisi.
+                    </p>
+                  </v-card-text>
+                </v-card>
+              </v-tab-item>
+              <v-tab-item value="email_settings">
+                <v-card flat>
+                  <v-card-text>
+                    <p>
+                      Fusce a quam. Phasellus nec sem in justo pellentesque facilisis. Nam eget dui. Proin viverra, ligula sit amet ultrices semper, ligula arcu tristique sapien, a accumsan nisi mauris ac eros. In dui magna, posuere eget, vestibulum et, tempor auctor, justo.
+                    </p>
+
+                    <p class="mb-0">
+                      Cras sagittis. Phasellus nec sem in justo pellentesque facilisis. Proin sapien ipsum, porta a, auctor quis, euismod ut, mi. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nam at tortor in tellus interdum sagittis.
+                    </p>
+                  </v-card-text>
+                </v-card>
+              </v-tab-item>
+            </v-tabs-items>
+
           </v-col>
-
 
 
         </v-row>
@@ -115,6 +111,7 @@ export default {
       return {
         sheet: false,
         settingsTabs: null,
+        
       }
     },
     mounted() {

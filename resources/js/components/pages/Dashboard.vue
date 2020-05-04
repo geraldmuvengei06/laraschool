@@ -12,9 +12,10 @@
           md="3"
           sm="6"
           xs="12"
-          elevation="10"
            v-for="(card, i) in cards" :key="i">
             <v-card
+            flat
+            elevation="1"
             :color="card[4]">
                 <v-row
                 justify="center"
@@ -42,6 +43,7 @@
           md="8"
           sm="10"
           xs="12"
+          class="is-centered"
           >
             <v-chip
             text-color="white"
@@ -64,7 +66,6 @@
                 right
                 class="secondary lighten-2"
               >
-                <v-icon>lock</v-icon>
               </v-avatar>
             </v-chip>
 
@@ -78,7 +79,6 @@
                 color="error"
                 right
               >
-                <v-icon>iconName</v-icon>
               </v-avatar>
 
             </v-chip>
@@ -95,7 +95,7 @@
           xs="12"
           >
 
-            <v-card>
+            <v-card flat>
               <v-card-title>
                 Fee Bal
                 <v-spacer></v-spacer>

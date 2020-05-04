@@ -26,7 +26,7 @@ class SettingsProvider extends ServiceProvider
     public function boot()
     {
         //
-        $settings = Settings::first();
+        $settings = Settings::firstOrFail();
 
         if ($settings !== null) {
             # code...

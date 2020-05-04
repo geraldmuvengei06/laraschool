@@ -4,29 +4,29 @@ namespace App\Http\Controllers\API;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use Spatie\Permission\Models\Role;
-use Spatie\Permission\Models\Permission;
 use App\User;
 use Auth;
 use Illuminate\Support\Facades\Hash;
+use Spatie\Permission\Models\Role;
+use Spatie\Permission\Models\Permission;
 
 
 
 class UserController extends Controller
 {
-    public function _construct()
+    public function __construct()
     {
 
         
-        // $this->middleware('permission:create-user', ['only' => ['store']]);
-        // $this->middleware('permission:update-user', ['only' => ['update']]);
-        // $this->middleware('permission:delete-user', ['only' => ['destroy']]);
+        // $this->middleware('permission:create-user', ['only' => 'store']);
+        // $this->middleware('permission:update-user', ['only' => 'update']);
+        // $this->middleware('permission:delete-user', ['only' => 'destroy']);
 
     }
     public function index()
     {
-        $users = User::with('permissions')->get();
-        $roles = Role::get();
+        $users = User::with('permissions')->with('roles')->get();
+        $roles = Role::get(['id', 'name']);
         $permissions = Permission::get();
 
         return response()->json([
@@ -59,8 +59,18 @@ class UserController extends Controller
                 $user->phone = $request->phone;
                 $user->confirmed = $request->confirmed;
                 $user->save();
+
+                if ($request->roles !== null) {
+                    # code...
+                    // $role = Role::findById($request->role_id);
+
+                    // if ($role !== null) {
+                        # code...
+                        $user->assignRole($request->roles);
+                    // }
+                }
     
-                return response()->json('Success.. User updated!', 200);
+                return response()->json("Success.. User updated!", 200);
             }
         // } else{
         //     abort(403);

@@ -18,7 +18,6 @@
           sm="12"
           xs="12"
           class="col-has-margin-top"
-          
           >
 
             <v-card flat>
@@ -55,15 +54,118 @@
                 loading-text="Loading... Please wait"
                 show-expand
               >
-                <!-- <template v-slot:item.permissions="{ item }">
+                
+                <template v-slot:expanded-item="{ headers, item }">
+                  <td flat :colspan="headers.length">
+                    <v-row>
+                      <v-col cols="12"
+                      lg=4
+                      md=4
+                      sm=4
+                      xs=12>
+                        <v-card flat class="text-center ">
+                          <v-responsive class="py-4">
+                          <v-avatar
+                              size="100"
+                              color="grey lighten-2"
+                          >
+                              <img :src="profile" :alt="item.first + item.last ">
+                          </v-avatar>
+                          </v-responsive>
+                          <v-card-text>
+                          <div class="subheading is-uppercase">{{ item.first + item.last }}</div>
+                          </v-card-text>
+
+                        
+
+                        </v-card>
+
+                      </v-col>
+
+
+                      <v-col cols="12"
+                      lg=8
+                      md=8
+                      sm=8
+                      xs=12>
+                        <v-card flat class="text-center ">
+                          
+                          <v-card-text>
+                            <div class="subheading is-uppercase">Id Number: {{ item.id_number }}</div>
+                            <div class="subheading is-uppercase">Address: {{ item.address }}</div>
+                            <div class="subheading is-uppercase">Profession: {{ item.profession }}</div>
+
+                            <p><strong class="subtitle">Roles</strong></p>
+
+                            <span>
+                              <v-chip outlined class="is-role-chip" v-for="(role, index) in item.roles" :key="index"  color="primary" >{{ role.name }}
+                                <v-avatar
+                                  color="error"
+                                  right
+                                  is-role-trash-icon
+                                  @click.stop="revokeRoleDialog = true"
+                                  pa-1
+                                >
+                                   <v-icon class="white--text" >close</v-icon>
+                                </v-avatar>
+
+                                <span>
+                                <!-- delete dialog -->
+
+                                <v-dialog
+                                v-model="revokeRoleDialog"
+                                max-width="290"
+                                >
+                                  <v-card>
+                                    <v-card-title class="headline">Are you sure you want to remove role from user?</v-card-title>
+
+                                    <v-card-actions>
+                                      <v-spacer></v-spacer>
+
+                                      <v-btn
+                                        color="success darken-1"
+                                        text
+                                        @click="revokeRoleDialog = false"
+                                      >
+                                        Cancel
+                                      </v-btn>
+
+                                      <v-btn
+                                        color="error darken-1"
+                                        text
+                                        @click="revokeRoleFromUser(item.id, role.id)"
+                                      >
+                                        Yes
+                                      </v-btn>
+                                    </v-card-actions>
+                                  </v-card>
+                                </v-dialog>
+                              </span>
+                              </v-chip>
+                            </span>
+                          </v-card-text>
+
+                          
+                        
+
+                        </v-card>
+
+                      </v-col>
+                      
+                    </v-row>
+                  </td>
+                </template>
+
+                
+                <template v-slot:item.permissions="{ item }">
                   <v-chip :color="getColor(item.permissions)" dark>{{ item.permissions }}</v-chip>
-                </template> -->
+                </template> 
                 <template v-slot:item.name="{ item }">
                     {{ getUserName(item) }}
                 </template>
 
                 <template v-slot:item.actions="{ item }" >
-                  <span v-if="($store.getters.user.id !== item.id )">
+                  <span >
                    <v-btn
                     color="success "
                     class="white--text"
@@ -79,11 +181,11 @@
                   </v-btn>
 
                   <v-btn
-                    
+                    v-if="($store.getters.user.id !== item.id )"
                     color="error lighten-1"
                     class="white--text"
                     fab
-                    @click="deleteUser(item)"
+                    @click.stop="delete_dialog = true"
                     x-small
                   >
                     <v-icon
@@ -94,15 +196,42 @@
                   </v-btn>
                 </span>
 
-                  
-                 
-                </template>
+                <span>
+                  <!-- delete dialog -->
 
-                <template #expanded_item="{ headers, item }">
-                  <h2>{{ item.id_number }}</h2>
-                  <h2>{{ item.phone }}</h2>
-                  <h2>{{ item.address }}</h2>
-                  <h2>{{ item.permissions ? item.permissions.length : '' }}</h2>
+                  <v-dialog
+                  v-model="delete_dialog"
+                  max-width="290"
+                  >
+                    <v-card>
+                      <v-card-title class="headline">Are you sure you want to delete?</v-card-title>
+
+                      <v-card-actions>
+                        <v-spacer></v-spacer>
+
+                        <v-btn
+                          color="success darken-1"
+                          text
+                          @click="delete_dialog = false"
+                        >
+                          Cancel
+                        </v-btn>
+
+                        <v-btn
+                          color="error darken-1"
+                          text
+                          @click="deleteUser(item)"
+                        >
+                          Yes
+                        </v-btn>
+                      </v-card-actions>
+                    </v-card>
+                  </v-dialog>
+                </span>
+
+
+              
+
 
                   <v-btn
                     color="primary lighten-1"
@@ -118,6 +247,18 @@
                     </v-icon>
                   </v-btn>
 
+                  
+                 
+                </template>
+
+                <template #expanded_item="{ headers, item }">
+                  <h2>{{ item.id_number }}</h2>
+                  <h2>{{ item.phone }}</h2>
+                  <h2>{{ item.address }}</h2>
+                  <h2>{{ item.permissions ? item.permissions.length : '' }}</h2>
+
+                  
+
                 </template> 
               </v-data-table>
             </v-card>
@@ -125,7 +266,7 @@
         </v-row>
       </v-container>
 
-      <!-- create role -->
+      <!-- create user -->
 
       <v-dialog v-model="dialog" max-width="400px">
         <v-form ref="roleForm" @submit.prevent="saveUser" >
@@ -291,20 +432,26 @@
                     xs=12
                     class="py-1">
 
-                        <v-select
-                          id="roles"
-                          append-icon="lock"
-                          :items="roles"
-                          v-model="userForm.role"
-                          label="Role"
-                          item-text="test"
-                          item-value="test"
-                          outlined
-                          dense
+                        <!-- <select class="v-input v-select" v-model="userForm.role_id" name="role_id" id="role_id">
+                          <option>Select Role</option>
+                          <option v-for="(role, index) in roles" :key="index" :value="role.id"> {{ role.name }}</option>
+                        </select> -->
 
-                        >
-                        
-                        </v-select>
+                        <v-select
+                          :items="roles"
+                          item-text="name"
+                          item-value="id"
+                          v-model="userForm.roles"
+                          label="Select Role"
+                          outlined
+                          hide-details
+                          
+                          multiple
+                          dense
+                        ></v-select>
+
+                      
+
                     </v-col>
 
                     <v-col cols="12"
@@ -314,7 +461,6 @@
                     xs="12"
                     class="py-0"
                     >
-                        
                         <v-switch class="my-2" color="success" v-model="userForm.confirmed" :label="(userForm.confirmed ? 'Confirmed' : 'Not Confirmed')"></v-switch>
                     </v-col>
 
@@ -375,18 +521,25 @@
         </v-form>
       </v-dialog>
 
+      
+
       <!-- The snackbar components takes message, and type props -->
     <snackbar-component :message="message"  :type="type"></snackbar-component>
     </div>
 </template>
 
 <script>
+import profile from '../../assets/images/profile.png';
+
 export default {
     data: () => ({
         // for modals
+      profile: profile,
       dialog: false,
       editUserDialog: false,
       editUserPermissions: false,
+      delete_dialog: false,
+      revokeRoleDialog: false,
 
       // for loading table
       tableLoading: false,
@@ -404,7 +557,7 @@ export default {
         last: '',
         email: '',
         phone: '',
-        role: '',
+        roles: null,
         confirmed: false,
       }),
       nameRules: [
@@ -428,7 +581,7 @@ export default {
         // { text: 'ID Number', value: 'id_number' },
         // { text: 'Address', value: 'address' },
         // { text: 'permissions', value: 'permissions.length' },
-        { text: 'Action', value: 'actions', sortable: false, align: 'center' }
+        { text: 'Action', value: 'actions', sortable: false, align: 'end' }
       ],
 
       user: {},
@@ -436,8 +589,7 @@ export default {
       roles: [],
       permissions: [],
       userPermissions: [],
-      
-        
+      singleExpand: false,
       
 
     }),
@@ -459,18 +611,29 @@ export default {
       editUser (item){
         this.editUserDialog = true
         this.userForm.fill(item)
-                console.log(this.userForm.confirmed);
+
+        this.userForm.roles = []
+        
+        item.roles.forEach(role => {
+          this.userForm.roles = role.id
+        });
 
       },
 
       updateUser(id){
         
+        console.log(this.userForm.roles);
+        
         this.userForm.put('/users/' + id).then((res) => {
+          // update user roles on the store
+          this.$store.commit('roles')
           this.message = res.data
           this.type = 'success'
           Fire.$emit('showSnackbar')
           this.getUsers();
           this.editUserDialog = false
+          
+
         }).catch((err) => {
           this.message = err.response.data.message
           this.type = 'error'
@@ -487,6 +650,7 @@ export default {
           this.type = 'success'
           Fire.$emit('showSnackbar')
           this.getUsers();
+          this.delete_dialog = false
           
         }).catch((err) => {
           this.message = err.response.data
@@ -497,9 +661,9 @@ export default {
       },
 
       editPermissions(item) {
-        this.role = item
-        this.rolePermissions = this.role.permissions
-        this.editRolePermissions = true
+        this.user = item
+        this.userrolePermissions = this.user.permissions
+        this.editUserPermissions = true
         
       },
 
@@ -521,6 +685,30 @@ export default {
         })
       },
 
+      revokeRoleFromUser(userId, roleId){
+        var roleUserForm = new Form({
+          role_id: roleId,
+          user_id: userId
+        })
+
+        roleUserForm.post('/revoke-role-from-user').then((res) => {
+          roleUserForm.reset()
+          
+          this.revokeRoleDialog = false,
+          this.message = res.data
+          this.type = 'success'
+          // emit a show snackbar event
+          Fire.$emit('showSnackbar')
+          this.getUsers()
+
+          
+        }).catch((err) => {
+          console.log(err);
+          
+        })
+        
+      },
+
       getUserValue(userPermissions_id, perm_id){
         if (userPermissions_id == perm_id) {
           this.value = true
@@ -532,6 +720,7 @@ export default {
         axios.get('/users').then((res) => {
           this.users = res.data.users
           this.roles = res.data.roles
+          
           this.permissions = res.data.permissions
         });
         this.tableLoading = false;
@@ -582,5 +771,21 @@ export default {
   }
   .is-card-container{
     padding-top: 0px !important;
+  }
+
+  .is-table-expand{
+    margin: 0 !important;
+    padding: 2px !important;
+    background: white;
+  }
+
+  tr.v-data-table__expanded__content {
+    padding: 0px !important
+  }
+  .is-role-chip{
+    margin: 2px;
+  }
+  .is-role-trash-icon{
+    cursor: pointer !important;
   }
 </style>

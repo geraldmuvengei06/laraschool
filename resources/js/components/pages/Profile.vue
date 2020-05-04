@@ -25,7 +25,7 @@
                     xs="12"
                     >
 
-                        <v-card flat elevation="1" class="text-center ">
+                        <v-card flat class="text-center ">
                             <v-responsive class="py-4">
                             <v-avatar
                                 size="100"
@@ -36,7 +36,7 @@
                             </v-responsive>
                             <v-card-text>
                             <div class="subheading is-uppercase">{{ $store.getters.username }}</div>
-                            <div class="grey--text is-capitalized">admin</div>
+                            <div class="grey--text is-capitalized" v-for="(role, index) in $store.getters.roles" :key="index">{{ role.name }}</div>
                             </v-card-text>
 
                             <v-card-actions>
@@ -489,7 +489,6 @@ export default {
 
     mounted() {
         this.userForm.fill(this.$store.getters.user)
-        this.passwordForm.reset()
     }
 }
 </script>

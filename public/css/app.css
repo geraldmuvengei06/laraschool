@@ -20831,11 +20831,20 @@
   100% {
     transform: rotate(359deg);
   }
-}.is-uppercase {
+}html {
+  font-size: 14px !important;
+  font-family: sans-serif;
+}
+
+.is-uppercase {
   text-transform: uppercase;
 }
 
 .is-capitalized {
   text-transform: capitalize;
+}
+
+.is-centered {
+  text-align: center;
 }
 

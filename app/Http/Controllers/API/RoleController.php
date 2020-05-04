@@ -7,10 +7,17 @@ use Illuminate\Http\Request;
 use Spatie\Permission\Models\Role;
 use Spatie\Permission\Models\Permission;
 use App\User;
+use Auth;
 
 
 class RoleController extends Controller
 {
+
+    public function __construct()
+    {
+        # code...
+        // $this->middleware('role:admin');
+    }
     /**
      * Display a listing of the resource.
      *
@@ -21,6 +28,19 @@ class RoleController extends Controller
         //
         $roles = Role::with('permissions')->get();
         $permissions = Permission::get();
+
+        return response()->json([
+            'roles' => $roles,
+            'permissions' => $permissions,
+        ], 200);
+    }
+
+    public function userRolesPermissions()
+    {
+        # code...
+        $user = Auth::user();
+        $roles = $user->roles;
+        $permissions = $user->permissions;
 
         return response()->json([
             'roles' => $roles,

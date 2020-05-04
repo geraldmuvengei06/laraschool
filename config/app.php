@@ -178,7 +178,7 @@ return [
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
         Spatie\Permission\PermissionServiceProvider::class,
-        App\Providers\SettingsProvider::class,
+        // App\Providers\SettingsProvider::class,
 
     ],
 

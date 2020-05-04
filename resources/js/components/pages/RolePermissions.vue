@@ -78,7 +78,7 @@
                     color="error lighten-1"
                     class="white--text"
                     fab
-                    @click="deleteRole(item)"
+                    @click.stop="delete_dialog = true"
                     x-small
                   >
                     <v-icon
@@ -87,6 +87,39 @@
                       delete
                     </v-icon>
                   </v-btn>
+
+                  <span>
+                  <!-- delete dialog -->
+
+                  <v-dialog
+                  v-model="delete_dialog"
+                  max-width="290"
+                  >
+                    <v-card>
+                      <v-card-title class="headline">Are you sure you want to delete?</v-card-title>
+
+                      <v-card-actions>
+                        <v-spacer></v-spacer>
+
+                        <v-btn
+                          color="success darken-1"
+                          text
+                          @click="delete_dialog = false"
+                        >
+                          Cancel
+                        </v-btn>
+
+                        <v-btn
+                          color="error darken-1"
+                          text
+                          @click.stop="deleteRole(item)"
+                        >
+                          Yes
+                        </v-btn>
+                      </v-card-actions>
+                    </v-card>
+                  </v-dialog>
+                </span>
 
                   <v-btn
                     color="primary darken-1"
@@ -247,6 +280,7 @@ export default {
       dialog: false,
       editRoleDialog: false,
       editRolePermissions: false,
+      delete_dialog: false,
 
       // for loading table
       tableLoading: false,
@@ -323,12 +357,12 @@ export default {
 
       deleteRole(item){
         axios.delete('/roles/' + item.id).then((res) => {
-
           // show snackbar
           this.message = res.data
           this.type = 'success'
           Fire.$emit('showSnackbar')
           this.getRoles();
+          this.delete_dialog = false
           
         }).catch((err) => {
           this.message = res.data

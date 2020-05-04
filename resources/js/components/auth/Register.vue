@@ -5,12 +5,11 @@
         class="fill-height"
         fluid
       >
-        <v-row
-          align="center"
-        >
+        <v-row>
           <v-col
             cols="12"
-            md="8"
+            lg="7"
+            md="7"
             sm="6"
             class="hidden-xs-only is-background primary"
           >
@@ -42,10 +41,15 @@
         
           <v-col
             cols="12"
+            lg="3"
+            offset-lg="1"
+            md="3"
+            offset-md="1"
             sm="6"
-            md="4"
             xs="12"
+            class="is-form-content"
           >
+            <v-form @submit.prevent="">
             <v-card class="elevation-0 flat ma-4">
               <v-toolbar
                 color="transparent"
@@ -60,6 +64,7 @@
                       :href="source"
                       icon
                       large
+                      color="success"
                       target="_blank"
                       v-on="on"
                     >
@@ -71,7 +76,6 @@
                
               </v-toolbar>
               <v-card-text>
-                <v-form>
                 
                 <v-row>
                     <v-col cols="12"
@@ -100,7 +104,7 @@
                     lg="6"
                     md="6"
                     sm="12"
-                    xs=12>
+                    xs="12">
 
                         <v-text-field
                             label="Last"
@@ -134,8 +138,8 @@
                     </v-col>
 
                     <v-col cols="12"
-                    lg="6"
-                    md="6"
+                    lg="12"
+                    md="12"
                     sm="12"
                     xs=12>
 
@@ -157,8 +161,8 @@
 
 
                     <v-col cols="12"
-                    lg="6"
-                    md="6"
+                    lg="12"
+                    md="12"
                     sm="12"
                     xs=12>
 
@@ -170,21 +174,23 @@
                             dense
                             outlined
                             v-model="form.password_confirmation"
+                            append-icon="lock"
                         />
                         <has-error :form="form" class="v-messages theme--light error--text" field="password_confirmation"></has-error>
                     </v-col>
                 </v-row>
 
 
-                </v-form>
               </v-card-text>
               <v-card-actions>
-                <v-btn color="primary" :loading="loading" @click="doRegister">Register</v-btn>
+                <v-btn type="submit" color="primary" :loading="loading" @click.stop="doRegister">Register</v-btn>
                 <v-spacer />
                 <v-btn flat text color="primary" link :to="{ name: 'login'}"  >Have an account?</v-btn>
 
               </v-card-actions>
-            </v-card>
+            </v-card>            
+
+            </v-form>
                 
           </v-col>
 
@@ -278,10 +284,18 @@
       padding-bottom: 0 !important;
   }
 
+  .is-form-content{
+    display: flex;
+    height: 100vh;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+  }
+
   .is-background{
     // background: #9652ff;
     
-      height: 100vh;
+      // height: 100vh;
     .is-background-content{
       display: flex;
             height: 100vh;
@@ -301,9 +315,11 @@
 
   .is-background-content-mini{
       display: flex;
+      // height: 100px;
       justify-content: center;
       align-items: center;
       flex-direction: column;
+      padding-top: 40px;
 
       .is-logo{
         font-size: 24px;
@@ -312,6 +328,10 @@
         border-radius: 50%;
       }
     }
+
+  .v-card__text {
+    padding-bottom: 0px !important;
+  }
 
    
   

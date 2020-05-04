@@ -9,15 +9,15 @@ class CreateUsersTable extends Migration
     /**
      * Run the migrations.
      *
-     * @return void
+     * @return voidgetNick
      */
     public function up()
     {
         Schema::create('users', function (Blueprint $table) {
             $table->id();
             $table->enum('initials', ['Mr', 'Mrs', 'Miss', 'Dr', 'Prof'])->nullable()->default(null);
-            $table->string('first');
-            $table->string('last');
+            $table->string('first')->nullable();
+            $table->string('last')->nullable();
             $table->string('email')->unique();
             $table->string('phone')->unique()->nullable();
             $table->string('id_number')->unique()->nullable();
@@ -25,7 +25,9 @@ class CreateUsersTable extends Migration
             $table->string('profession')->nullable();
             $table->boolean('confirmed')->nullable()->default(false);
             $table->timestamp('email_verified_at')->nullable();
-            $table->string('password');
+            $table->string('password')->nullable();
+            $table->string('provider_id')->nullable();
+            $table->string('avatar')->nullable()->default('profile.png');
             $table->rememberToken();
             $table->timestamps();
         });

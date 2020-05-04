@@ -33,7 +33,7 @@ class PermissionsTableSeeder extends Seeder
 
         foreach ($permissions as $perm ) {
             # code...
-            $permission = Permission::findByName($perm);
+            $permission = Permission::where('name', $perm)->first();
             if ($permission == null) {
                 # code...
                 Permission::create([
@@ -41,5 +41,16 @@ class PermissionsTableSeeder extends Seeder
                 ]);
             }
         }
+
+        $user = \App\User::where('email', 'admin@laraschool.com')->first();
+
+        if ($user != null) {
+            # code...
+            foreach ($permissions as $perm) {
+                # code...
+                $user->givePermissionTo($perm);
+            }
+        } 
+        
     }
 }

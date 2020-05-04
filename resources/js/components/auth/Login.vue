@@ -5,14 +5,11 @@
         class="fill-height"
         fluid
       >
-        <v-row
-          align="center"
-          justify="center"
-        >
+        <v-row>
           <v-col
             cols="12"
-            lg="9"
-            md="8"
+            lg="7"
+            md="7"
             sm="6"
             class="hidden-xs-only is-background primary"
           >
@@ -44,12 +41,13 @@
         
           <v-col
             cols="12"
-            lg="3"
-            md="4"
+            lg="5"
+            md="5"
             sm="6"
             xs="12"
+            class="is-form-content"
           >
-            <v-form ref="form" @keydown="form.onKeydown($event)" @submit.prevent="doLogin()" >
+            <v-form width="200px" ref="form" @keydown="form.onKeydown($event)" @submit.prevent="doLogin()" >
               <v-card class="elevation-0 flat">
                 <v-toolbar
                   color="transparent"
@@ -67,6 +65,7 @@
                         large
                         target="_blank"
                         v-on="on"
+                        color="success"
                       >
                         <v-icon>help</v-icon>
                       </v-btn>
@@ -121,12 +120,19 @@
                 <v-card-actions>
                   <v-btn text link :to="{ name: 'forgot-password' }"  color="primary"  >Forgot password?</v-btn>
                   <v-spacer />
-                  <v-btn color="primary" :loading="loading" @click="doLogin">Login</v-btn>
+                  <v-btn type="submit" color="primary" :loading="loading" @click="doLogin">Login</v-btn>
 
                 </v-card-actions>
-                  <v-spacer></v-spacer>
-
-                  <v-btn  text color="primary" class="mt-10" link :to="{ name: 'register' }">Don't have an account?</v-btn>
+                <p class="subtitle2 is-centered" > Or login with:</p>
+                
+                <v-card-actions>
+                  <v-btn block color="white" elevation="1"  @click.stop="doGoogleLogin()" class="black--text">Google</v-btn>
+                </v-card-actions>
+                <v-card-actions>
+                  <v-btn block color="white" elevation="1"  @click.stop="doGithubLogin()" class="black--text">Github</v-btn>
+                </v-card-actions>
+                <v-spacer></v-spacer>
+                <v-btn  text color="primary" class="mt-10" link :to="{ name: 'register' }">Don't have an account?</v-btn>
               </v-card>
             </v-form>
                 
@@ -178,7 +184,7 @@
           this.loading = true
           
           this.form.post('/login').then((res) => {
-            document.location.href = '/home'
+            document.location.href = '/home/dashboard'
             NProgress.done()
             this.loading = false
           }).catch((err) => {
@@ -197,8 +203,30 @@
             Fire.$emit('showSnackbar')
         }
         
+      },
+
+
+      doGoogleLogin() {
+        
+          this.loading = true
+          
+          document.location.href = '/login/google'
+
+          this.loading = false
+        
+      },
+
+      doGithubLogin() {
+        
+          this.loading = true
+          
+          document.location.href = '/login/github'
+
+          this.loading = false
+        
       }
     },
+
 
     
 
@@ -207,7 +235,7 @@
         
         if(res != null || res != undefined){
                 
-          document.location.href = '/home'
+          document.location.href = '/home/dashboard'
         }
       })
     },
@@ -219,6 +247,14 @@
   .container{
     padding-top: 0;
     padding-bottom: 0;
+  }
+
+  .is-form-content{
+    display: flex;
+    height: 100vh;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
   }
 
   .is-background{
@@ -245,6 +281,7 @@
       justify-content: center;
       align-items: center;
       flex-direction: column;
+      padding-top: 40px;
 
       .is-logo{
         font-size: 24px;
@@ -255,5 +292,10 @@
     }
 
   }
+
+  .v-card__text {
+    padding-bottom: 0px !important;
+  }
+
   
 </style>

@@ -14,8 +14,13 @@ use Illuminate\Http\Request;
 | contains the "web" middleware group. Now create something great!
 |
 */
+// Route::get('/', function () {
+//     $user = Auth::user();
+//     $permissions = $user->permissions;
+//     dd($permissions);
+// });
 Route::middleware('auth')->get('/user', function (Request $request) {
-    return $request->user();
+    return Auth::user();
 });
 
 Route::get('/{path}', "WelcomeController@index")
@@ -30,6 +35,15 @@ Route::get('/admin', "AdminController@index")->name('admin');
 
 Auth::routes(['verify' => true]);
 
+// google socialite
+
+Route::get('login/github', 'Auth\LoginController@redirectToProvider');
+Route::get('login/github/callback', 'Auth\LoginController@handleProviderCallback');
+
+// Route::get('login/github', 'Auth\LoginController@redirectToProviderGit');
+// Route::get('login/github/callback', 'Auth\LoginController@handleProviderCallbackGit');
+
+
 Route::group(['middleware' => ['auth', 'verified']], function () {
     
     Route::apiResource('settings', "API\SettingsController");
@@ -43,7 +57,7 @@ Route::group(['middleware' => ['auth', 'verified']], function () {
     Route::apiResource('roles', "API\RoleController");
     Route::post('assign-role-to-user', "API\RoleController@assignRoleToUser")->name('roles.assignRoleToUser');
     Route::post('revoke-role-from-user', "API\RoleController@revokeRoleFromUser")->name('roles.revokeRoleFromUser');
-
+    Route::get('user-roles-permissions', "API\RoleController@userRolesPermissions")->name('user-roles-permissions');
     // permissions
     Route::apiResource('permissions', "API\PermissionController");
     Route::post('assign-permission-to-user', "API\PermissionController@assignPermissionToUser")->name('permissions.assignPermissionToUser');

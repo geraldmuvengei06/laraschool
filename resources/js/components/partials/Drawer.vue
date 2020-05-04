@@ -3,9 +3,10 @@
     <v-app-bar
       app
       clipped-right
-      dark
-      color="primary"
+      light
+      color="white "
       dense
+      flat
     >
       <v-app-bar-nav-icon @click.stop="toggleMinivariant"/>
       <v-toolbar-title>{{ $store.getters.app_name }}</v-toolbar-title>
@@ -17,7 +18,7 @@
       app
       color="accent"
       dark
-    :expand-on-hover="expandOnHover"
+      :expand-on-hover="expandOnHover"
       :mini-variant="miniVariant"
     >
    
@@ -33,7 +34,7 @@
           </v-list-item-avatar>
           <v-list-item-content class="is-avatar-content">
             <v-list-item-title class="is-avatar-username">{{  $store.getters.username }}</v-list-item-title>
-            <v-list-item-subtitle link>admin</v-list-item-subtitle>
+            <v-list-item-subtitle class="is-capitalized" link v-for="(role, index) in $store.getters.roles" :key="index">{{ role.name }}</v-list-item-subtitle>
           </v-list-item-content>
         </v-list-item>
 
@@ -134,12 +135,6 @@ export default {
       }
     },
 
-    created() {
-      console.log(this.$store.getters.app_name);
-      
-    },
-
-    
 
     methods: {
       toggleMinivariant(){        

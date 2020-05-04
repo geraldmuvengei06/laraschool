@@ -12,7 +12,7 @@ use App\Notifications\CustomResetPasswordNotification;
 
 class User extends Authenticatable implements MustVerifyEmail
 {
-    use HasApiTokens, Notifiable, HasRoles, CanResetPassword;
+    use HasApiTokens, Notifiable, CanResetPassword, HasRoles;
 
     /**
      * The attributes that are mass assignable.
@@ -20,7 +20,7 @@ class User extends Authenticatable implements MustVerifyEmail
      * @var array
      */
     protected $fillable = [
-        'initials', 'first', 'last', 'email', 'phone', 'id_number', 'address', 'profession', 'confirmed', 'password',
+        'initials', 'first', 'last', 'email', 'phone', 'id_number', 'address', 'profession', 'confirmed', 'password', 'provider_id'
     ];
 
     /**

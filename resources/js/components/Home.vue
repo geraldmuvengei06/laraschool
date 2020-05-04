@@ -37,11 +37,14 @@
     created() {
       this.$store.commit('change', this.appname)  
       this.$store.commit('user', this.user) 
-
       let username = this.user.first + ' ' + this.user.last
-
       this.$store.commit('username', username)
+    },
 
+    mounted() {
+      this.$store.commit('roles')
+      
+      
     },
   }
 </script>

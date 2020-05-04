@@ -8,7 +8,12 @@
 @import url('https://cdn.jsdelivr.net/npm/@mdi/font@4.x/css/materialdesignicons.min.css');
 
 // Variables
-@import 'variables';
+// @import 'variables';
+
+html{
+    font-size: 14px !important;
+    font-family: sans-serif;
+}
 
 .is-uppercase{
     text-transform: uppercase;
@@ -17,3 +22,19 @@
 .is-capitalized{
     text-transform: capitalize;
 }
+.is-centered{
+    text-align: center;
+}
+
+// .v-list-item.v-list-item--active{
+//     background-color: white !important;
+//     margin: 0px 10px;
+//     border-radius: 4px;
+//     .v-icon{
+//         color: rgba(0, 0, 0, 0.87);
+//     }
+// }
+// .v-list-group__header.v-list-item.v-list-item--active.v-list-item--link{
+//     background-color: transparent !important;
+//     margin: 0px !important;
+// }

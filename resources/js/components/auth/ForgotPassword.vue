@@ -5,14 +5,11 @@
         class="fill-height"
         fluid
       >
-        <v-row
-          align="center"
-          justify="center"
-        >
+        <v-row>
           <v-col
             cols="12"
-            lg="9"
-            md="8"
+            lg="7"
+            md="7"
             sm="6"
             class="hidden-xs-only is-background primary"
           >
@@ -44,10 +41,11 @@
         
           <v-col
             cols="12"
-            lg="3"
-            md="4"
+            lg="5"
+            md="5"
             sm="6"
             xs="12"
+            class="is-form-content"
           >
             <v-form ref="form" @keydown="form.onKeydown($event)" @submit.prevent="doForgotPass()" >
               <v-card class="elevation-0 flat">
@@ -67,6 +65,7 @@
                         large
                         target="_blank"
                         v-on="on"
+                        color="success"
                       >
                         <v-icon>help</v-icon>
                       </v-btn>
@@ -187,6 +186,14 @@
     padding-bottom: 0;
   }
 
+  .is-form-content{
+    display: flex;
+    height: 100vh;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+  }
+
   .is-background{
     // background: #9652ff;
     
@@ -221,5 +228,11 @@
     }
 
   }
+
+  .v-card__text {
+    padding-bottom: 0px !important;
+  }
+
+
   
 </style>
